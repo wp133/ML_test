@@ -20,11 +20,13 @@ def split(X, Y):
     best_feature, best_threshold = None, None
     best_gini = float("inf")
 
-    n_samples, n_features = X.shape
+    #n_samples, n_features = X.shape
+    n_features = X.shape[1]
     n_features_to_try = min(50, n_features)  # 50 losowych featuresów
     features_to_try = np.random.choice(n_features, size=n_features_to_try, replace=False)
     
-    for feature in features_to_try:
+    #for feature in features_to_try:
+    for feature in range(n_features):
         thresholds = np.unique(X[:, feature])
         for t in thresholds:
             left_mask = X[:, feature] <= t
@@ -96,13 +98,13 @@ def decode_image(image_dict, resize_to=14, quantize_levels=32):
         return pixels
     return np.array([])
 
-def train_test_split_manual(X, y, test_size=0.2):
-    n = len(X)
-    idx = np.random.permutation(n)
-    test_count = int(n * test_size)
-    test_idx = idx[:test_count]
-    train_idx = idx[test_count:]
-    return X[train_idx], X[test_idx], y[train_idx], y[test_idx]
+#def train_test_split_manual(X, y, test_size=0.2):
+#    n = len(X)
+#    idx = np.random.permutation(n)
+#    test_count = int(n * test_size)
+#    test_idx = idx[:test_count]
+#    train_idx = idx[test_count:]
+#    return X[train_idx], X[test_idx], y[train_idx], y[test_idx]
 
 # Ładowanie datasetu
 splits = {'train': 'train-00000-of-00001.parquet', 'test': 'test-00000-of-00001.parquet'}
@@ -141,5 +143,5 @@ tree = build_tree(X_train, y_train, max_depth=5) # mniejsza głębokość dla pi
 
 y_pred = predict(tree, X_test)
 print(f"\nAccuracy: {accuracy(y_test, y_pred):.4f}") #f
-print(f"Confusion matrix: {confusion_matrix(y_test, y_pred)}")
+print(f"Confusion matrix:\n {confusion_matrix(y_test, y_pred)}")
 
