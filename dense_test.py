@@ -58,7 +58,7 @@ if __name__ == "__main__":
     num_classes = 100  # CIFAR-100 has 100 fine-grained classes
 
     transform = transforms.Compose([
-        transforms.Resize((64, 64)),  # Resize 32x32 to 64x64 for DenseNet compatibility
+        transforms.Resize((64, 64)),  #resize 32x32 -> 64x64 for DenseNet compatibility
         transforms.ConvertImageDtype(torch.float),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
@@ -85,7 +85,7 @@ if __name__ == "__main__":
         fine_labels = df["fine_label"].to_numpy()
         coarse_labels = df["coarse_label"].to_numpy()
         
-        # Convert images from HWC to CHW format
+        #convert HWC to CHW 
         images = images.transpose(0, 3, 1, 2)  # Shape: (N, 3, 32, 32)
         
         images = torch.from_numpy(images).float() / 255.0
