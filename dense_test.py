@@ -25,6 +25,13 @@ class ImageDataset(Dataset):
 
 def build_densenet(num_classes=10):
     model = models.densenet121(pretrained=False)
+    #model = models.densenet121(pretrained=True)
+    #model = models.densenet161(pretrained=False)
+    #model = models.densenet161(pretrained=True)
+    #model = models.densenet169(pretrained=False)
+    #model = models.densenet169(pretrained=True)
+    #model = models.densenet201(pretrained=False)
+    #model = models.densenet201(pretrained=True)
     in_features = model.classifier.in_features
     model.classifier = nn.Linear(in_features, num_classes)
     return model
