@@ -24,6 +24,7 @@ class ImageDataset(Dataset):
 
 
 def build_densenet(num_classes=10):
+    #sprawdzać po jednej na raz
     model = models.densenet121(pretrained=False)
     #model = models.densenet121(pretrained=True)
     #model = models.densenet161(pretrained=False)
